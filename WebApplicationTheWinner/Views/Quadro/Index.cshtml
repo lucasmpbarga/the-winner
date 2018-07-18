@@ -1,0 +1,87 @@
+﻿@model IEnumerable<WebApplicationTheWinner.Models.Time>
+
+@{
+    ViewBag.Title = "Index";
+}
+<script>
+
+    window.onload = function () {
+
+       
+
+    };
+
+</script>
+
+<div class="d-tables">
+    <table class="table adj-table">
+        <tr>
+            <th colspan="2" class="t-center">
+                Semifinal
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.ActionLink("=>", "FaseTwo", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <table class="table adj-table">
+        <tr>
+            <th colspan="2" class="t-center">
+                Final
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            if (item.Fase == 2 || item.Fase == 1)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.ActionLink("=>", "Winner", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+    <table class="table adj-table">
+        <tr>
+            <th colspan="2" class="t-center">
+                Campeão
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            if (item.Fase == 1)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+
+</div>
+<div>
+    @using (Html.BeginForm("Reset", "Quadro", FormMethod.Get))
+    {
+        <button type="submit" name="botao1" id="botao1" class="btn btn-danger btn-clear">Reset</button>
+    }
+</div>
